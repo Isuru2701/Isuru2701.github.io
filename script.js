@@ -37,7 +37,7 @@ async function fetchLoraxPrediction(temperature, humidity) { //Function which fe
       // Update the UI with Lorax prediction values
       const loraxContainer = document.querySelector(".additional-container");
       loraxContainer.innerHTML = `
-        <p>Prediction: ${loraxData.prediction}</p>
+        <p>Chance: ${Math.round(loraxData.prediction * 100)}%</p>
         <p>Likelihood: ${loraxData.likelihood}</p>
       `;
     } catch (error) {
@@ -54,11 +54,11 @@ async function fetchLoraxPrediction(temperature, humidity) { //Function which fe
     let currentTemperature;
     let currentHumidity;
   
-    const temperatureRef = ref(database, 'Temperature');
-    const humidityRef = ref(database, 'Humidity');
-    const windSpeedRef = ref(database, 'SoilMoisture');
-    const smokeLevelRef = ref(database, 'Smoke');
-    const flameLevelRef = ref(database, 'Flame');
+    const temperatureRef = ref(database, 'temp');
+    const humidityRef = ref(database, 'humidity');
+    const windSpeedRef = ref(database, 'soil');
+    const smokeLevelRef = ref(database, 'smoke');
+    const flameLevelRef = ref(database, 'flame');
   
     onValue(temperatureRef, (snapshot) => {
       currentTemperature = snapshot.val();  
