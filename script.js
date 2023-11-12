@@ -75,7 +75,7 @@ async function fetchLoraxPrediction(temperature, humidity) { //Function which fe
     });
   
     onValue(windSpeedRef, (snapshot) => {
-      wind_speed.innerHTML = `${snapshot.val()}%`;
+      wind_speed.innerHTML = `${snapshot.val()}`;
     });
   
     onValue(smokeLevelRef, (snapshot) => {
