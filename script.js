@@ -1,6 +1,5 @@
 import { database, ref, onValue } from "./firebase.js";
 
-const inputBox = document.querySelector('.input-box');
 const fetchBtn = document.getElementById('fetchBtn');
 const weather_img = document.querySelector('.weather-img');
 const temperature = document.querySelector('.temperature');
@@ -14,10 +13,10 @@ const weather_body = document.querySelector('.weather-body');
 async function fetchLoraxPrediction(temperature, humidity) { //Function which fetch the firebase data to Lorax ml model
     const loraxApiUrl = "https://lorax.azurewebsites.net/predict";
     const loraxRequestBody = {
-      region: "Colombo",
-      date: "2023-11-06",
-      temp: temperature,
-      humidity: humidity,
+      "region": "Colombo",
+      "date": new Date().toISOString().split('T')[0],
+      "temp": temperature,
+      "humidity": humidity
     };
   
     try {
@@ -47,7 +46,7 @@ async function fetchLoraxPrediction(temperature, humidity) { //Function which fe
   }
   
 
-  async function checkWeather(city) { //Function which retrieves data values from Firebase
+  async function checkWeather() { //Function which retrieves data values from Firebase
     console.log('run');
     location_not_found.style.display = 'none';
     weather_body.style.display = 'flex';
@@ -108,7 +107,6 @@ async function fetchLoraxPrediction(temperature, humidity) { //Function which fe
         //Fetching Lorax prediction when both temperature and humidity are available
         fetchLoraxPrediction(currentTemperature, currentHumidity);
       }
-      fetchLoraxPrediction(currentTemperature, currentHumidity);
     }
   }
   
@@ -118,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
   checkWeather("YourDefaultLocation"); // Provide a default location if needed
 
   setInterval(() => {
-    checkWeather(inputBox.value);
+    checkWeather();
   }, 2000);
 });
 
